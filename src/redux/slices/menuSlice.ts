@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Menu } from '@/@types/menuTypes';
 import { fetchMenuDetails } from '@/lib/api';
 
@@ -24,6 +24,11 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
+    initializeMenu: (state, action: PayloadAction<Menu>) => {
+      state.menu = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
+    },
     clearMenu(state) {
       state.menu = null;
       state.status = 'idle';
@@ -47,5 +52,5 @@ const menuSlice = createSlice({
   },
 });
 
-export const { clearMenu } = menuSlice.actions;
+export const { initializeMenu, clearMenu } = menuSlice.actions;
 export default menuSlice.reducer;

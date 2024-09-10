@@ -1,16 +1,25 @@
 'use client'
 import { useRef } from 'react'
 import { Provider } from 'react-redux'
-import { makeStore, AppStore } from '@/redux/store'
+import { Restaurant } from '@/@types/restaurantTypes'
+import { Menu } from '@/@types/menuTypes'
+import { initializeRestaurant } from '@/redux/slices/restaurantSlice'
+import { initializeMenu } from '@/redux/slices/menuSlice'
+import { AppStore, makeStore } from '@/redux/store'
 
-export default function StoreProvider({
-  children
-}: {
+interface StoreProps {
   children: React.ReactNode
-}) {
-  const storeRef = useRef<AppStore>()
+  restaurant: Restaurant
+  menu?: Menu | null
+}
+
+export default function StoreProvider({ children, restaurant, menu }: StoreProps) {
+  const storeRef = useRef<AppStore | null>(null)
+
   if (!storeRef.current) {
     storeRef.current = makeStore()
+    storeRef.current.dispatch(initializeRestaurant(restaurant));
+    if(menu) storeRef.current.dispatch(initializeMenu(menu));
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>

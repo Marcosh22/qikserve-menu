@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Restaurant } from '@/@types/restaurantTypes';
 import { fetchRestaurantDetails } from '@/lib/api';
 
@@ -23,6 +23,11 @@ const restaurantSlice = createSlice({
   name: 'restaurant',
   initialState,
   reducers: {
+    initializeRestaurant: (state, action: PayloadAction<Restaurant>) => {
+      state.restaurant = action.payload;
+      state.status = 'succeeded';
+      state.error = null;
+    },
     clearRestaurant(state) {
       state.restaurant = null;
       state.status = 'idle';
@@ -46,5 +51,5 @@ const restaurantSlice = createSlice({
   },
 });
 
-export const { clearRestaurant } = restaurantSlice.actions;
+export const { initializeRestaurant, clearRestaurant } = restaurantSlice.actions;
 export default restaurantSlice.reducer;

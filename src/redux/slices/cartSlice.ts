@@ -1,13 +1,16 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartState, CartItem } from '@/@types/cartTypes';
+import { LOCAL_STORAGE_KEY } from '@/middlewares/persistCartMiddleware';
 
-const LOCAL_STORAGE_KEY = 'qikserve_cart';
-
-const initialState: CartState = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '{}') || {
-  items: [],
-  totalPrice: 0,
+const getInitialState = (): CartState => {
+  if (typeof window !== 'undefined') {
+    const storedCart = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedCart ? JSON.parse(storedCart) : { items: [], totalPrice: 0 };
+  }
+  return { items: [], totalPrice: 0 };
 };
+
+const initialState = getInitialState();
 
 const cartSlice = createSlice({
   name: 'cart',
