@@ -5,6 +5,7 @@ import "./globals.css";
 import { notFound } from "next/navigation";
 import StoreProvider from "@/providers/StoreProvider";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import Header from "@/components/Header/Header";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -32,7 +33,10 @@ export default async function RootLayout({
     <html lang={restaurant?.locale || "en"}>
       <body className={`${roboto.className}`}>
         <StoreProvider restaurant={restaurant} menu={menu}>
-          <PageWrapper>{children}</PageWrapper>
+          <PageWrapper>
+            <Header />
+            {children}
+          </PageWrapper>
         </StoreProvider>
       </body>
     </html>

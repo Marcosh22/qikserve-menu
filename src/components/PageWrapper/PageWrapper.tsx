@@ -23,7 +23,6 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
         } as React.CSSProperties
       }
     >
-        {restaurant?.name}
       {children}
     </div>
   );

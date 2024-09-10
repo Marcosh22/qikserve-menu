@@ -1,0 +1,16 @@
+.menuButton {
+    padding: 5px;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: #FFF;
+}
+
+.menuButton.disabled {
+    opacity: 0;
+    pointer-events: none;
+}
