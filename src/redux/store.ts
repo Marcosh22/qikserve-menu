@@ -4,17 +4,19 @@ import menuReducer from '@/redux/slices/menuSlice';
 import restaurantReducer from '@/redux/slices/restaurantSlice';
 import persistCartMiddleware from '@/middlewares/persistCartMiddleware';
 
-const store = configureStore({
-  reducer: {
-    menu: menuReducer,
-    restaurant: restaurantReducer,
-    cart: cartReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(persistCartMiddleware),
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      menu: menuReducer,
+      restaurant: restaurantReducer,
+      cart: cartReducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(persistCartMiddleware),
+  })
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>
 
-export default store;
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']

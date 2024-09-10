@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Restaurant } from '@/@types/restaurantTypes';
 import { fetchRestaurantDetails } from '@/lib/api';
 
@@ -23,18 +23,6 @@ const restaurantSlice = createSlice({
   name: 'restaurant',
   initialState,
   reducers: {
-    fetchRestaurantStart(state) {
-      state.status = 'loading';
-      state.error = null;
-    },
-    fetchRestaurantSuccess(state, action: PayloadAction<Restaurant>) {
-      state.status = 'succeeded';
-      state.restaurant = action.payload;
-    },
-    fetchRestaurantFailure(state, action: PayloadAction<string>) {
-      state.status = 'failed';
-      state.error = action.payload;
-    },
     clearRestaurant(state) {
       state.restaurant = null;
       state.status = 'idle';
@@ -58,5 +46,5 @@ const restaurantSlice = createSlice({
   },
 });
 
-export const { fetchRestaurantStart, fetchRestaurantSuccess, fetchRestaurantFailure, clearRestaurant } = restaurantSlice.actions;
+export const { clearRestaurant } = restaurantSlice.actions;
 export default restaurantSlice.reducer;
