@@ -1,9 +1,9 @@
-import styles from "./page.module.css";
+import RestaurantBanner from "@/components/RestaurantBanner/RestaurantBanner";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      
+    <div>
+        <RestaurantBanner />
     </div>
   );
 }
