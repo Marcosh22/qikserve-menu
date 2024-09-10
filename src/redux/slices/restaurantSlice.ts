@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Restaurant } from '@/@types/restaurantTypes';
+import { fetchRestaurantDetails } from '@/lib/api';
 
 interface RestaurantState {
   restaurant: Restaurant | null;
@@ -12,6 +13,11 @@ const initialState: RestaurantState = {
   status: 'idle',
   error: null,
 };
+
+export const fetchRestaurant = createAsyncThunk('restaurant/fetchRestaurant', async () => {
+  const restaurant = await fetchRestaurantDetails();
+  return restaurant;
+});
 
 const restaurantSlice = createSlice({
   name: 'restaurant',
@@ -34,6 +40,21 @@ const restaurantSlice = createSlice({
       state.status = 'idle';
       state.error = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRestaurant.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchRestaurant.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.restaurant = action.payload;
+      })
+      .addCase(fetchRestaurant.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'Failed to fetch restaurant';
+      });
   },
 });
 
