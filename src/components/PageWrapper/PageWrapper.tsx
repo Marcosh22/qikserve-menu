@@ -8,7 +8,7 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
   const {
     backgroundColour = "#FFFFFF",
     primaryColour = "#0C00B1",
-    primaryColourHover = "#0021A1",
+    primaryColourHover = "#0C00B1",
     navBackgroundColour = "#0C00B1",
   } = restaurant?.webSettings || {};
 
