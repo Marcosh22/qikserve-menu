@@ -22,4 +22,17 @@
 
 .categoryToggler span {
     color: var(--primary-color);
+    transition: transform 0.15s ease-in;
+}
+
+.category.collapsed .categoryToggler span {
+    transform: rotate(180deg);
+}
+
+.categoryProducts {
+    overflow: hidden;
+}
+
+.category.collapsed .categoryProducts {
+    height: 0;
 }

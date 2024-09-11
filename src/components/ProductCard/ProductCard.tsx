@@ -1,5 +1,8 @@
+'use client'
+
 import Image from "next/image";
 import styles from "./ProductCard.module.css";
+import formatMoney from "@/utils/formatMoney";
 
 interface ProductCardProps {
   name: string;
@@ -14,7 +17,7 @@ function ProductCard({ name, description, price, image }: ProductCardProps) {
       <div className={styles.productContent}>
         <h3 className={styles.productTitle}>{name}</h3>
         <p className={styles.productDescription}>{description}</p>
-        <p className={styles.productPrice}>{price}</p>
+        <p className={styles.productPrice}>{formatMoney(price, 'BRL', 'pt-BR')}</p>
       </div>
       {image ? (
         <div className={styles.categoryPicture}>
