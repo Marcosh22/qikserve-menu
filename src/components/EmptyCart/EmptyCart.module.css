@@ -1,0 +1,12 @@
+.card {
+    padding: 24px;
+    background-color: #FFF;
+}
+
+.message {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 16px;
+    color: #464646;
+}

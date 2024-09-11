@@ -5,6 +5,7 @@ import Card from "@/components/Card/Card";
 import CategoryList from "@/components/CategoryList/CategoryList";
 import CategorySectionList from "@/components/CategorySectionList/CategorySectionList";
 import Sticky from "@/components/Sticky/Sticky";
+import CartCard from "@/components/CartCard/CartCard";
 
 export default function Home() {
   return (
@@ -23,9 +24,11 @@ export default function Home() {
               </Card>
             </div>
             <div>
-              <Card>
-                <Sticky>Teste</Sticky>
-              </Card>
+              <Sticky>
+                <Card>
+                  <CartCard />
+                </Card>
+              </Sticky>
             </div>
           </div>
         </div>
