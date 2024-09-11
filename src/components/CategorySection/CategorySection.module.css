@@ -1,0 +1,25 @@
+.categoryToggler {
+    display: flex;
+    gap: 19px;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 32px 16px 12px 16px;
+    outline: none;
+}
+
+.categoryToggler h2 {
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    line-height: 28px;
+    color: #121212;
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.categoryToggler span {
+    color: var(--primary-color);
+}

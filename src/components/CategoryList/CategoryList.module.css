@@ -1,7 +1,12 @@
 .categories {
-    display: flex;
-    gap: 12px;
-    padding: 20px 16px 24px 16px;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 12px;
+  padding: 20px 16px 24px 16px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.categoryToggler::-webkit-scrollbar {
+  display: none;
 }
