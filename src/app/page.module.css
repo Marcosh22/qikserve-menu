@@ -1,5 +1,9 @@
-.grid {
+.gridWrapper {
   background-color: #ffffff;
+}
+
+.grid {
+  top: 64px;
 }
 
 .cartContainer {
@@ -7,10 +11,14 @@
 }
 
 @media (min-width: 768px) {
+  .gridWrapper {
+    padding: 32px 40px;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 1fr 320px;
     gap: 24px;
-    padding: 32px 40px;
+    top: 52px;
   }
 }

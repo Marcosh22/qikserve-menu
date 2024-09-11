@@ -1,0 +1,17 @@
+.stickyContent {
+  width: 100%;
+}
+
+.fixed {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 90;
+}
+
+@media (min-width: 768px) {
+  .fixed {
+    top: 52px;
+  }
+}

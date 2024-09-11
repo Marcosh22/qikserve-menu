@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from '@/redux/slices/cartSlice';
-import menuReducer from '@/redux/slices/menuSlice';
-import restaurantReducer from '@/redux/slices/restaurantSlice';
-import persistCartMiddleware from '@/middlewares/persistCartMiddleware';
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "@/redux/slices/cartSlice";
+import menuReducer from "@/redux/slices/menuSlice";
+import restaurantReducer from "@/redux/slices/restaurantSlice";
+import categoryReducer from "@/redux/slices/categorySlice";
+import persistCartMiddleware from "@/middlewares/persistCartMiddleware";
 
 export const makeStore = () => {
   return configureStore({
@@ -10,13 +11,14 @@ export const makeStore = () => {
       menu: menuReducer,
       restaurant: restaurantReducer,
       cart: cartReducer,
+      category: categoryReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(persistCartMiddleware),
-  })
-}
+  });
+};
 
-export type AppStore = ReturnType<typeof makeStore>
+export type AppStore = ReturnType<typeof makeStore>;
 
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

@@ -25,6 +25,7 @@ function ProductCard({ name, description, price, image }: ProductCardProps) {
             src={image}
             alt={name}
             fill={true}
+            sizes="100vw"
             style={{
               objectFit: "cover",
               objectPosition: "center",

@@ -5,13 +5,20 @@ interface CategoryCardProps {
   image: string;
   title: string;
   isActive?: boolean;
+  onClick?: () => void;
 }
 
-function CategoryCard({ image, title, isActive = false }: CategoryCardProps) {
+function CategoryCard({
+  image,
+  title,
+  isActive = false,
+  onClick = () => {},
+}: CategoryCardProps) {
   return (
     <div className={styles.categoryCardWrapper}>
-      <div
+      <button
         className={`${styles.categoryCard} ${isActive ? styles.active : ""}`}
+        onClick={onClick}
       >
         <div className={styles.categoryPictureWrapper}>
           <div className={styles.categoryPicture}>
@@ -19,6 +26,7 @@ function CategoryCard({ image, title, isActive = false }: CategoryCardProps) {
               src={image}
               alt={title}
               fill={true}
+              sizes="100vw"
               style={{
                 objectFit: "cover",
                 objectPosition: "center",
@@ -29,7 +37,7 @@ function CategoryCard({ image, title, isActive = false }: CategoryCardProps) {
         <div className={styles.categoryTitleContainer}>
           <h3 className={styles.categoryTitle}>{title}</h3>
         </div>
-      </div>
+      </button>
     </div>
   );
 }

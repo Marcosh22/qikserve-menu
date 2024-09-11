@@ -17,6 +17,7 @@ function RestaurantBanner() {
             fill={true}
             priority={true}
             loading="eager"
+            sizes="100vw"
             style={{
               objectFit: "cover",
               objectPosition: "center",

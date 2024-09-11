@@ -5,6 +5,7 @@
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  background-color: #FFFFFF;
 }
 
 .categoryToggler::-webkit-scrollbar {

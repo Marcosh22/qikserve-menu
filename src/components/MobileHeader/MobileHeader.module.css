@@ -1,9 +1,15 @@
 .header {
     background-color: var(--nav-background);
+    width: 100%;
     padding: 18px 16px;
     display: flex;
     align-items: center;
     gap: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
 }
 
 .pageTitle {
