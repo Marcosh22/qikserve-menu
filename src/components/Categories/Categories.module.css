@@ -1,0 +1,5 @@
+.categories {
+    display: flex;
+    gap: 12px;
+    padding: 20px 16px 24px 16px;
+}

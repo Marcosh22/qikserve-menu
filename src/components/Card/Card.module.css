@@ -1,0 +1,5 @@
+@media (min-width: 768px) {
+    .card {
+        box-shadow: 0 2px 14px 0px rgba(0, 0, 0, 0.14);
+    }
+}
