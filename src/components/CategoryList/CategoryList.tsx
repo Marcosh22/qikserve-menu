@@ -1,10 +1,10 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import styles from "./Categories.module.css";
+import styles from "./CategoryList.module.css";
 import CategoryCard from "../CategoryCard/CategoryCard";
 
-function Categories() {
+function CategoryList() {
   const { menu } = useAppSelector((state) => state.menu);
 
   return (
@@ -21,4 +21,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default CategoryList;
