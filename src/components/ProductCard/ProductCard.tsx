@@ -1,29 +1,37 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import styles from "./ProductCard.module.css";
 import formatMoney from "@/utils/formatMoney";
+import { Item } from "@/@types/menuTypes";
+import { useAppStore } from "@/redux/hooks";
+import { setActiveProduct } from "@/redux/slices/productSlice";
 
 interface ProductCardProps {
-  name: string;
-  description: string;
-  price: number;
-  image?: string;
+  product: Item;
 }
 
-function ProductCard({ name, description, price, image }: ProductCardProps) {
+function ProductCard({ product }: ProductCardProps) {
+  const store = useAppStore();
+
+  function handleProductClick() {
+    store.dispatch(setActiveProduct(product));
+  }
+
   return (
-    <div className={styles.productCard}>
+    <button className={styles.productCard} onClick={handleProductClick}>
       <div className={styles.productContent}>
-        <h3 className={styles.productTitle}>{name}</h3>
-        <p className={styles.productDescription}>{description}</p>
-        <p className={styles.productPrice}>{formatMoney(price, 'BRL', 'pt-BR')}</p>
+        <h3 className={styles.productTitle}>{product.name}</h3>
+        <p className={styles.productDescription}>{product.description}</p>
+        <p className={styles.productPrice}>
+          {formatMoney(product.price, "BRL", "pt-BR")}
+        </p>
       </div>
-      {image ? (
+      {product?.images?.length ? (
         <div className={styles.categoryPicture}>
           <Image
-            src={image}
-            alt={name}
+            src={product.images[0].image}
+            alt={product.name}
             fill={true}
             sizes="100vw"
             style={{
@@ -33,7 +41,7 @@ function ProductCard({ name, description, price, image }: ProductCardProps) {
           />
         </div>
       ) : null}
-    </div>
+    </button>
   );
 }
 

@@ -1,6 +1,7 @@
 :root {
-  --background: #EEEEEE;
+  --background: #eeeeee;
   --foreground: #121212;
+  --scroll-width: 17px;
 }
 
 html,
@@ -16,6 +17,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding-top: 64px;
   position: relative;
+}
+
+html[data-scroll-locked] {
+  overflow: hidden !important;
 }
 
 * {
@@ -40,7 +45,11 @@ a {
   body {
     padding-top: 52px;
   }
-  
+
+  html[data-scroll-locked] {
+    padding-right: var(--scroll-width) !important;
+  }
+
   .container {
     padding-left: 16px;
     padding-right: 16px;

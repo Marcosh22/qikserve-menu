@@ -9,7 +9,7 @@ function CategorySectionList() {
   const { menu } = useAppSelector((state) => state.menu);
   const sectionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  const store = useAppStore()
+  const store = useAppStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,17 +20,19 @@ function CategorySectionList() {
           const offsetTop = window.innerWidth >= 768 ? 190 + 52 : 190 + 64;
 
           if (rect.top <= offsetTop + 50 && rect.bottom >= 100) {
-            const categoryId = Number(section.id.replace('category-section-', ''));
+            const categoryId = Number(
+              section.id.replace("category-section-", "")
+            );
 
-            store.dispatch(setActiveCategory(categoryId))
+            store.dispatch(setActiveCategory(categoryId));
           }
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [store]);
 

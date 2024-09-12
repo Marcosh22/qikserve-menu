@@ -6,10 +6,11 @@ import CategoryList from "@/components/CategoryList/CategoryList";
 import CategorySectionList from "@/components/CategorySectionList/CategorySectionList";
 import Sticky from "@/components/Sticky/Sticky";
 import CartCard from "@/components/CartCard/CartCard";
+import ProductDetails from "@/components/ProductDetails/ProductDetails";
 
 export default function Home() {
   return (
-    <main className="scrollable-area">
+    <main>
       <RestaurantBanner />
       <div className="container">
         <SearchInput />
@@ -33,6 +34,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <ProductDetails />
     </main>
   );
 }

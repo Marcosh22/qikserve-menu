@@ -15,25 +15,22 @@ function CategorySection({ name, products = [] }: CategorySectionProps) {
   const [isCollapsed, setCollapse] = useState(false);
 
   return (
-    <div className={`${styles.category} ${isCollapsed ? styles.collapsed : ''}`}>
-      <button className={styles.categoryToggler} onClick={() => setCollapse(!isCollapsed)}>
+    <div
+      className={`${styles.category} ${isCollapsed ? styles.collapsed : ""}`}
+    >
+      <button
+        className={styles.categoryToggler}
+        onClick={() => setCollapse(!isCollapsed)}
+      >
         <h2>{name}</h2>
         <span>
           <ChevronUp color="currentColor" width={24} height={24} />
         </span>
       </button>
       <div className={styles.categoryProducts}>
-        {
-            products?.map(product => (
-                <ProductCard 
-                    key={`product-${product.id}`}
-                    name={product.name}
-                    description={product?.description || ''}
-                    price={product.price}
-                    image={product?.images?.length ? product.images[0].image : ''}
-                />
-            ))
-        }
+        {products?.map((product) => (
+          <ProductCard key={`product-${product.id}`} product={product} />
+        ))}
       </div>
     </div>
   );

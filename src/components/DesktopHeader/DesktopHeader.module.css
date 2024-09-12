@@ -5,6 +5,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
     z-index: 99;
+}
+
+[data-scroll-locked] .header {
+    width: calc(100% - var(--scroll-width));
 }
