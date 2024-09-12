@@ -1,8 +1,10 @@
+import IconProps from "./IconProps";
+
 function BackArrowIcon({
   width = 16,
   height = 16,
   color = "#FFFFFF",
-}) {
+}: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

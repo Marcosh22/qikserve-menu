@@ -1,0 +1,71 @@
+.container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: #FFF;
+}
+
+.button:disabled {
+    cursor: default;
+    pointer-events: none;
+    background-color: #DADADA;
+    color: #5F5F5F;
+}
+
+.container .buttonIcon {
+    display: inline-block;
+}
+
+.value {
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    color: #121212;
+}
+
+.container.small {
+    gap: 4px;
+}
+
+.container.large {
+    gap: 16px;
+}
+
+.container.small .button {
+    width: 20px;
+    height: 20px;
+}
+
+.container.large .button {
+    width: 32px;
+    height: 32px;
+}
+
+.container.small .buttonIcon {
+    width: 12px;
+    height: 12px;
+}
+
+.container.large .buttonIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.container.small .value {
+   font-size: 16px;
+   min-width: 30px;
+}
+
+.container.large .value {
+    font-size: 24px;
+    min-width: 47px;
+ }

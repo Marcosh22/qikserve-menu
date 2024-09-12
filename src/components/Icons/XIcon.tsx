@@ -1,4 +1,6 @@
-function XIcon({ width = 16, height = 16, color = "#FFFFFF" }) {
+import IconProps from "./IconProps";
+
+function XIcon({ width = 16, height = 16, color = "#FFFFFF" }: IconProps) {
   return (
     <svg
       width={width}

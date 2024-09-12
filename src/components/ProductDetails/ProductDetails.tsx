@@ -11,7 +11,6 @@ import {
 } from "@/@types/menuTypes";
 import Modifier from "../Modifier/Modifier";
 
-
 function ProductImage({
   imageSrc,
   altText,
