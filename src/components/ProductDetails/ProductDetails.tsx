@@ -5,11 +5,11 @@ import Image from "next/image";
 import Modal from "../Modal/Modal";
 import { useAppSelector, useAppStore } from "@/redux/hooks";
 import { setActiveProduct } from "@/redux/slices/productSlice";
-import { useState } from "react";
-import {
-  ModifierItem as ModifierItemType,
-} from "@/@types/menuTypes";
+import { useEffect, useState } from "react";
+import { ModifierItem as ModifierItemType } from "@/@types/menuTypes";
 import Modifier from "../Modifier/Modifier";
+import QuantityControl from "../QuantityControl/QuantityControl";
+import Button from "../Button/Button";
 
 function ProductImage({
   imageSrc,
@@ -53,68 +53,147 @@ function ProductDetails() {
   const { activeProduct: product } = useAppSelector((state) => state.product);
   const store = useAppStore();
 
-  const [selectedModifiers, setSelectedModifiers] = useState<
-    ModifierItemType[]
-  >([]);
+  const [selectedItemsByModifier, setSelectedItemsByModifier] = useState<{
+    [modifierId: number]: { item: ModifierItemType; quantity: number }[];
+  }>({});
   const [quantity, setQuantity] = useState(1);
 
-  const handleModifierChange = (item: ModifierItemType) => {
-    if(!product?.modifiers?.length) return;
+  useEffect(() => {
+    setQuantity(1);
+    setSelectedItemsByModifier([]);
+  }, [product]);
 
-    if (selectedModifiers.some((i) => i.id === item.id)) {
-      setSelectedModifiers((prev) => prev.filter((i) => i.id !== item.id));
-    } else if (selectedModifiers.length < product.modifiers[0].maxChoices) {
-      setSelectedModifiers((prev) => [...prev, item]);
-    }
+  const handleItemChange = (
+    modifierId: number,
+    itemId: number,
+    quantity: number
+  ) => {
+    setSelectedItemsByModifier((prev) => {
+      const selectedItems = prev[modifierId] || [];
+
+      const currentQuantity =
+        selectedItems.find((selected) => selected.item.id === itemId)
+          ?.quantity || 0;
+
+      if (quantity === 0) {
+        return {
+          ...prev,
+          [modifierId]: selectedItems.filter((item) => item.item.id !== itemId),
+        };
+      } else {
+        const modifier = product?.modifiers?.find(
+          (mod) => mod.id === modifierId
+        );
+
+        if (modifier) {
+          if (modifier.maxChoices > 1) {
+            if (
+              selectedItems.length >= modifier.maxChoices &&
+              currentQuantity === 0
+            ) {
+              return prev;
+            }
+            return {
+              ...prev,
+              [modifierId]: selectedItems.some(
+                (item) => item.item.id === itemId
+              )
+                ? selectedItems.map((item) =>
+                    item.item.id === itemId ? { ...item, quantity } : item
+                  )
+                : [
+                    ...selectedItems,
+                    {
+                      item: modifier.items.find((i) => i.id === itemId)!,
+                      quantity,
+                    },
+                  ],
+            };
+          } else {
+            return {
+              ...prev,
+              [modifierId]: [
+                {
+                  item: modifier.items.find((i) => i.id === itemId)!,
+                  quantity,
+                },
+              ],
+            };
+          }
+        }
+      }
+
+      return prev;
+    });
   };
 
-  const handleQuantityChange = (increment: boolean) => {
-    setQuantity((prevQuantity) =>
-      increment ? prevQuantity + 1 : Math.max(1, prevQuantity - 1)
-    );
+  const validateRequiredModifiers = (): boolean => {
+    if (!product?.modifiers?.length) return true;
+
+    return product.modifiers.every((modifier) => {
+      const selectedItems = selectedItemsByModifier[modifier.id] || [];
+      const totalSelected = selectedItems.reduce(
+        (acc, curr) => acc + curr.quantity,
+        0
+      );
+
+      if (modifier.minChoices > 0) {
+        return totalSelected >= modifier.minChoices;
+      }
+      return true;
+    });
   };
 
-  const selectedPrice = selectedModifiers.reduce(
-    (acc, curr) => acc + curr.price,
+  const selectedPrice = Object.values(selectedItemsByModifier).reduce(
+    (acc, selectedItems) =>
+      acc +
+      selectedItems.reduce(
+        (itemAcc, curr) => itemAcc + curr.item.price * curr.quantity,
+        0
+      ),
     0
   );
+
   const totalPrice = selectedPrice * quantity;
 
-  function handleModalClose() {
-    store.dispatch(setActiveProduct(null));
-  }
+  const handleModalClose = () => store.dispatch(setActiveProduct(null));
 
   return (
     <Modal isOpen={!!product} onClose={handleModalClose}>
       <div className={styles.card}>
-        {product?.images?.length ? (
+        {product?.images?.length && (
           <ProductImage
             imageSrc={product.images[0].image}
             altText={product.name}
           />
-        ) : null}
+        )}
         <div className={styles.content}>
           <ProductDescription
             name={product?.name || ""}
             description={product?.description || ""}
           />
-
           {product?.modifiers?.map((modifier) => (
             <Modifier
               key={modifier.id}
               modifier={modifier}
-              selectedItems={selectedModifiers}
-              onModifierChange={handleModifierChange}
+              selectedItems={selectedItemsByModifier[modifier.id] || []}
+              handleItemChange={(itemId, quantity) =>
+                handleItemChange(modifier.id, itemId, quantity)
+              }
             />
           ))}
         </div>
-        <div className="quantity-controls">
-          <button onClick={() => handleQuantityChange(false)}>-</button>
-          <span>{quantity}</span>
-          <button onClick={() => handleQuantityChange(true)}>+</button>
-        </div>
-
-        <button className="add-to-order">Add to Order - R${totalPrice}</button>
+      </div>
+      <div className={styles.footer}>
+        <QuantityControl
+          min={1}
+          onChange={setQuantity}
+          value={quantity}
+          variant="lg"
+        />
+        <Button disabled={!validateRequiredModifiers()}>
+          Add to Order • R${totalPrice.toFixed(2)}
+        </Button>
       </div>
     </Modal>
   );

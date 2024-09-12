@@ -12,6 +12,7 @@
     align-items: center;
     background-color: var(--primary-color);
     color: #FFF;
+    cursor: pointer;
 }
 
 .button:disabled {

@@ -1,0 +1,48 @@
+.item {
+    padding: 16px 24px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 16px
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.description {
+    flex: 1;
+}
+
+.title {
+    font-size: 16px;
+    margin: 0;
+    line-height: 19px;
+    font-weight: 500;
+    color: #121212;
+}
+
+.price {
+    font-size: 16px;
+    margin: 0;
+    line-height: 19px;
+    font-weight: 400;
+    color: #464646;
+}
+
+.radioButton {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 3px solid #5F5F5F;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.15s ease-in-out;
+}
+
+.radioButton.checked {
+    border-width: 7px;
+}
