@@ -11,7 +11,12 @@ interface ModalProps {
   children?: ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, showCloseBtn = true, children }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  showCloseBtn = true,
+  children,
+}: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.documentElement.setAttribute("data-scroll-locked", "1");
@@ -20,7 +25,7 @@ const Modal = ({ isOpen, onClose, showCloseBtn = true, children }: ModalProps) =
     }
 
     return () => {
-        document.documentElement.removeAttribute("data-scroll-locked");
+      document.documentElement.removeAttribute("data-scroll-locked");
     };
   }, [isOpen]);
 
@@ -36,8 +41,7 @@ const Modal = ({ isOpen, onClose, showCloseBtn = true, children }: ModalProps) =
             <XIcon width={12} height={12} color="currentColor" />
           </button>
         ) : null}
-
-        {children}
+        <div className={styles.body}>{children}</div>
       </div>
     </div>
   );
