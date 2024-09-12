@@ -10,6 +10,7 @@ import { ModifierItem as ModifierItemType } from "@/@types/menuTypes";
 import Modifier from "../Modifier/Modifier";
 import QuantityControl from "../QuantityControl/QuantityControl";
 import Button from "../Button/Button";
+import formatMoney from "@/utils/formatMoney";
 
 function ProductImage({
   imageSrc,
@@ -154,7 +155,7 @@ function ProductDetails() {
     0
   );
 
-  const totalPrice = selectedPrice * quantity;
+  const totalPrice = ((product?.price || 0) + selectedPrice) * quantity;
 
   const handleModalClose = () => store.dispatch(setActiveProduct(null));
 
@@ -192,7 +193,7 @@ function ProductDetails() {
           variant="lg"
         />
         <Button disabled={!validateRequiredModifiers()}>
-          Add to Order • R${totalPrice.toFixed(2)}
+          Add to Order • {formatMoney(totalPrice, "BRL", "pt-BR")}
         </Button>
       </div>
     </Modal>
