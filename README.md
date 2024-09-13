@@ -78,10 +78,12 @@ Before you begin, ensure you have the following installed:
 
 To build the project for production, use:
 
-    ```bash
-    npm run build
-    npm run start
-    ```
+   ```bash
+   npm run build
+   npm run start
+
+   ```
+    
 
 This will build the application and start a server optimized for production.
 
