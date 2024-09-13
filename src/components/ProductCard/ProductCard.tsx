@@ -7,6 +7,7 @@ import { Item } from "@/@types/menuTypes";
 import { useAppStore } from "@/redux/hooks";
 import { setActiveProduct } from "@/redux/slices/productSlice";
 import getMinProductPrice from "@/utils/getMinProductPrice";
+import ProductCountBadge from "../ProductCountBadge/ProductCountBadge";
 
 interface ProductCardProps {
   product: Item;
@@ -22,7 +23,10 @@ function ProductCard({ product }: ProductCardProps) {
   return (
     <button className={styles.productCard} onClick={handleProductClick}>
       <div className={styles.productContent}>
-        <h3 className={styles.productTitle}>{product.name}</h3>
+        <h3 className={styles.productTitle}>
+          <ProductCountBadge productId={product.id} />
+          {product.name}
+        </h3>
         <p className={styles.productDescription}>{product.description}</p>
         <p className={styles.productPrice}>
           {formatMoney(getMinProductPrice(product), "BRL", "pt-BR")}
