@@ -1,0 +1,61 @@
+.card {
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.header {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-bottom: 1px solid #dadada;
+}
+
+.pageTitle {
+  display: block;
+  flex-grow: 1;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+  text-align: center;
+  color: #121212;
+}
+
+.menuButton {
+  padding: 5px;
+  height: 28px;
+  width: 28px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.checkoutButtonContainer {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  padding: 8px 24px 24px 24px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .card {
+    min-height: 100vh;
+  }
+}

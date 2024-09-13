@@ -7,6 +7,8 @@ import CategorySectionList from "@/components/CategorySectionList/CategorySectio
 import Sticky from "@/components/Sticky/Sticky";
 import CartCard from "@/components/CartCard/CartCard";
 import ProductDetails from "@/components/ProductDetails/ProductDetails";
+import AllergyLinkCard from "@/components/AllergyLinkCard/AllergyLinkCard";
+import Checkout from "@/components/Checkout/Checkout";
 
 export default function Home() {
   return (
@@ -24,7 +26,7 @@ export default function Home() {
                 <CategorySectionList />
               </Card>
             </div>
-            <div>
+            <div className={styles.cartDescription}>
               <Sticky>
                 <Card>
                   <CartCard />
@@ -32,6 +34,12 @@ export default function Home() {
               </Sticky>
             </div>
           </div>
+        </div>
+        <div className={styles.footer}>
+          <AllergyLinkCard />
+        </div>
+        <div className={styles.checkoutContainer}>
+          <Checkout />
         </div>
       </div>
       <ProductDetails />

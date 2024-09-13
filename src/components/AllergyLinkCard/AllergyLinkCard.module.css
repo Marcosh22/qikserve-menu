@@ -1,0 +1,21 @@
+.card {
+    padding: 24px;
+    background-color: #F8F9FA;
+    border-top: 1px solid #DADADA;
+    border-bottom: 1px solid #DADADA;
+}
+
+.linkWrapper {
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.link {
+    text-decoration: underline;
+    color: var(--primary-color);
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 700;
+}
