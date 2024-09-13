@@ -40,6 +40,7 @@ function Sticky({ children }: { children: ReactNode }) {
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
 
     return () => {

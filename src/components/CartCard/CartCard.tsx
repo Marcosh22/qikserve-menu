@@ -1,15 +1,46 @@
-import EmptyCart from '../EmptyCart/EmptyCart';
-import styles from './CartCard.module.css';
+"use client";
+
+import { useAppSelector } from "@/redux/hooks";
+import EmptyCart from "../EmptyCart/EmptyCart";
+import styles from "./CartCard.module.css";
+import CartItem from "../CartItem/CartItem";
+import { useEffect, useState } from "react";
+import formatMoney from "@/utils/formatMoney";
 
 function CartCard() {
-    return (
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
+  const [hydrated, setHydrated] = useState<boolean>(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  return (
+    <div>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Carrinho</h2>
+      </div>
+      {hydrated && items?.length ? (
         <div>
-            <div className={styles.header}>
-                <h2 className={styles.title}>Carrinho</h2>
-            </div>
-            <EmptyCart />
+          {items?.map((item) => (
+            <CartItem key={`cart-item-${item.item.id}`} {...item} />
+          ))}
+          <div className={styles.subTotal}>
+            <p className={styles.subTotalLabel}>Sub total</p>
+            <p className={styles.subTotalValue}>
+              {formatMoney(totalPrice, "BRL", "pt-BR")}
+            </p>
+          </div>
+          <div className={styles.total}>
+          <p className={styles.totalLabel}>Total:</p>
+            <p className={styles.totalValue}>{formatMoney(totalPrice, "BRL", "pt-BR")}</p>
+          </div>
         </div>
-    )
+      ) : (
+        <EmptyCart />
+      )}
+    </div>
+  );
 }
 
 export default CartCard;

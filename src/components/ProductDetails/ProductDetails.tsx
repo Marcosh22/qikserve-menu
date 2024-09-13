@@ -11,6 +11,9 @@ import Modifier from "../Modifier/Modifier";
 import QuantityControl from "../QuantityControl/QuantityControl";
 import Button from "../Button/Button";
 import formatMoney from "@/utils/formatMoney";
+import { addItem } from "@/redux/slices/cartSlice";
+import { CartItem, CartModifierItems } from "@/@types/cartTypes";
+import generateUniqueId from "@/utils/generateUniqueId";
 
 function ProductImage({
   imageSrc,
@@ -159,6 +162,31 @@ function ProductDetails() {
 
   const handleModalClose = () => store.dispatch(setActiveProduct(null));
 
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    const modifierItems: CartModifierItems[] = Object.entries(
+      selectedItemsByModifier
+    ).map((selectedItem) => {
+      return selectedItem[1].map((item) => {
+        return {
+          item: item.item,
+          quantity: item.quantity
+        }
+      }).flat()
+    }).flat();
+
+    const cartItem: CartItem = {
+      id: generateUniqueId(12),
+      item: product,
+      quantity,
+      modifierItems: modifierItems,
+    };
+
+    store.dispatch(addItem(cartItem));
+    handleModalClose();
+  };
+
   return (
     <Modal isOpen={!!product} onClose={handleModalClose}>
       <div className={styles.card}>
@@ -192,7 +220,10 @@ function ProductDetails() {
           value={quantity}
           variant="lg"
         />
-        <Button disabled={!validateRequiredModifiers()}>
+        <Button
+          disabled={!validateRequiredModifiers()}
+          onClick={handleAddToCart}
+        >
           Add to Order • {formatMoney(totalPrice, "BRL", "pt-BR")}
         </Button>
       </div>

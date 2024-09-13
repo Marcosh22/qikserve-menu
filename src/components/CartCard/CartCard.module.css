@@ -1,6 +1,7 @@
 .header {
     padding: 22px 24px;
     background-color: #F8F9FA;
+    margin-bottom: 9px;
 }
 
 .title {
@@ -9,4 +10,50 @@
     color: #464646;
     letter-spacing: 0.5px;
     line-height: 20px;
+}
+
+.subTotal,
+.total {
+    display: flex;
+    gap: 16px;
+    border-top: 1px solid #DADADA;
+    background-color: #F8F9FA;
+}
+
+.subTotal {
+    padding: 22px 16px 17px 16px;
+}
+
+.subTotalLabel {
+    flex: 1;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #121212;
+}
+
+.subTotalValue {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #121212;
+}
+
+.total {
+    padding: 16px;
+}
+
+.totalLabel {
+    flex: 1;
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 300;
+    color: #121212;
+}
+
+.totalValue {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #121212;
 }

@@ -1,9 +1,15 @@
-import { Item } from "./menuTypes";
+import { Item, ModifierItem } from "./menuTypes";
 
-export interface CartItem {
-  item: Item;
-  price: number;
+export interface CartModifierItems {
+  item: ModifierItem;
   quantity: number;
+}
+export interface CartItem {
+  id: string;
+  item: Item;
+  modifierItems: CartModifierItems[];
+  quantity: number;
+  totalPrice?: number;
 }
 
 export interface CartState {
