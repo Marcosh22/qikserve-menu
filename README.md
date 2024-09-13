@@ -105,7 +105,7 @@ This will build the application and start a server optimized for production.
 
 I opted to use **Next.js** for several key reasons:
 
-According to the [official React documentation](https://reactjs.org/docs/getting-started.html), while it's possible to use React without a framework, leveraging a framework like Next.js addresses several challenges that arise when building a complete app or site with React. Here’s why Next.js was chosen:
+According to the [official React documentation](https://react.dev/learn/start-a-new-react-project), while it's possible to use React without a framework, leveraging a framework like Next.js addresses several challenges that arise when building a complete app or site with React. Here’s why Next.js was chosen:
 
 - **Complexity Management:** As your JavaScript bundle grows with new features, managing code splitting for individual routes and optimizing data fetching can become complex. Next.js handles these aspects efficiently out-of-the-box, avoiding the need for manual setup and integration of multiple tools.
 
