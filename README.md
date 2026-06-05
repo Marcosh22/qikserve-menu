@@ -1,6 +1,6 @@
 # Qikserve Menu
 
-## Challenge - Front End Developer
+## Challenge - Front End Developer -Dev
 
 This project was developed as part of a technical challenge for Qikserve, focusing on building a restaurant menu application. Customers can browse restaurant menus, view details about items, and add them to a cart. The application is built using **Next.js**, **React**, **TypeScript**, and **Redux**, with a strong focus on clean code, componentization, and responsiveness.
 
